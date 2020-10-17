@@ -39,12 +39,7 @@ namespace ParcelApp.Business
             if (!heavyParcel.Any())
                 throw new Exception("No Heavy Parcel Configured.");
             
-            var identifiedParcel = heavyParcel.SingleOrDefault(p => weight >= p.Min && weight <= p.Max);
-            
-            if (identifiedParcel == null)
-                throw new NotSupportedException("Not Supported Heavy Parcel Configuration.");
-
-            return identifiedParcel;
+            return heavyParcel.Single();
         }
     }
 

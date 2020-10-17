@@ -1,4 +1,5 @@
 using ParcelApp.Common;
+using ParcelApp.Common.Constants;
 using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Contract
@@ -8,7 +9,9 @@ namespace ParcelApp.Contract
         public double Min { get; } = 50;
         public double Max { get; } = 99;
         public decimal Cost { get; } = 15m;
-        public ParcelTypes ParcelType { get; } = ParcelTypes.Large;
+        public string ParcelType { get; } = ParcelTypes.Large.ToString();
         public double WeightLimit { get; } = 6;
+        
+        public DiscountTypes DiscountTypes { get; } = DiscountTypes.NotSupported;
     }
 }

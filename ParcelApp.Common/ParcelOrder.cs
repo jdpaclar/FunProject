@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ParcelApp.Common.Constants;
 
 namespace ParcelApp.Common
 {
@@ -21,11 +22,5 @@ namespace ParcelApp.Common
         public double Size { get; }
         public double Weight { get; }
         public CalculationType CalculationType { get; }
-    }
-
-    public enum CalculationType
-    {
-        BySize,
-        ByWeight
     }
 }

@@ -6,6 +6,7 @@ using Moq;
 using ParcelApp.Business.Interface;
 using ParcelApp.Business.Test.Helpers;
 using ParcelApp.Common;
+using ParcelApp.Common.Constants;
 
 namespace ParcelApp.Business.Test
 {
@@ -50,7 +51,7 @@ namespace ParcelApp.Business.Test
         [Theory]
         [InlineData(5, 1, true, CalculationType.BySize, 22)]
         [InlineData(5, 1,false, CalculationType.BySize, 11)]
-        [InlineData(5, 3,false, CalculationType.BySize, 13)]
+        [InlineData(5, 3,false, CalculationType.BySize, 15)]
         [InlineData(5, 2, true, CalculationType.ByWeight, 100)]
         [InlineData(5, 50, true, CalculationType.ByWeight, 100)]
         [InlineData(5, 52, true, CalculationType.ByWeight, 104)]

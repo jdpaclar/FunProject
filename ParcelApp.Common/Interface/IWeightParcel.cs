@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 
 namespace ParcelApp.Common.Interface
 {
-    public interface IWeightParcel
+    public interface IWeightParcel: IParcelDiscount
     {
         public double Min { get; }
         public double Max { get; }

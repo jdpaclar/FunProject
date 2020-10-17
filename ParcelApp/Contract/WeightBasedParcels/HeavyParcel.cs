@@ -1,3 +1,4 @@
+using ParcelApp.Common.Constants;
 using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Contract.WeightBasedParcels
@@ -8,5 +9,7 @@ namespace ParcelApp.Contract.WeightBasedParcels
         public double Max { get; } = 50;
         public decimal OverCharge { get; } = 1m;
         public decimal InitialCost { get; } = 50m;
+        
+        public DiscountTypes DiscountTypes { get; } = DiscountTypes.NotSupported;
     }
 }

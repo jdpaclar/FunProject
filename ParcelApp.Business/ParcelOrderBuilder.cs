@@ -5,6 +5,8 @@ using ParcelApp.Business.Interface;
 using ParcelApp.Common;
 using ParcelApp.Common.Interface;
 using ParcelApp.Business;
+using ParcelApp.Business.CostCalculators;
+using ParcelApp.Common.Constants;
 
 namespace ParcelApp.Business
 {
@@ -21,31 +23,46 @@ namespace ParcelApp.Business
         {
             var parcelOrderOutput = new ParcelOrderOutput();
             
-            var parcelTypes = GetParcelTypeBySizes(parcelOrder.ParcelOrderItems);
-            parcelOrderOutput.LineItems = parcelTypes.Select(p => new ParcelOrderOutputItem
-            {
-                ParcelType = p.ParcelType.ToString(),
-                Cost = p.Cost
-            }).ToList();
-
-            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
-                throw new Exception("Invalid Process.");
-
             var parcelBySize = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.BySize));
             var parcelByWeight = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.ByWeight));
-
-            ICostCalculator calculator;
-
+            
+            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
+                throw new Exception("Invalid Process.");
+            
             if (parcelBySize.Any())
             {
-                calculator = new SizeBasedCostCalculator(_parcelClassifier);
-                parcelOrderOutput.TotalCost += calculator.GetTotalCost(parcelBySize);
-            }
+                var lineOutputItems = parcelBySize.Select(s =>
+                {
+                    var config = _parcelClassifier.ClassifyParcelBySize(s.Size);
+                    var cost = SizeBasedCalculator.GetCostPerLine(s.Weight, config);
 
+                    return new ParcelOrderOutputItem
+                    {
+                        ParcelType = config.ParcelType,
+                        Cost = cost
+                    };
+                });
+                
+                parcelOrderOutput.LineItems.AddRange(lineOutputItems);
+                parcelOrderOutput.TotalCost += lineOutputItems.Select(i => i.Cost).Sum();
+            }
+            
             if (parcelByWeight.Any())
             {
-                calculator = new WeightBasedCostCalculator(_parcelClassifier);
-                parcelOrderOutput.TotalCost += calculator.GetTotalCost(parcelByWeight);
+                var lineOutputItems = parcelByWeight.Select(s =>
+                {
+                    var config = _parcelClassifier.ClassifyHeavyParcelByWeight(s.Weight);
+                    var cost = WeightBasedCalculator.GetCostPerLine(s.Weight, config);
+
+                    return new ParcelOrderOutputItem
+                    {
+                        ParcelType = "HeavyParcel",
+                        Cost = cost
+                    };
+                });
+                
+                parcelOrderOutput.LineItems.AddRange(lineOutputItems);
+                parcelOrderOutput.TotalCost += lineOutputItems.Select(i => i.Cost).Sum();
             }
 
             if (parcelOrder.Speedy)
@@ -53,8 +70,5 @@ namespace ParcelApp.Business
 
             return parcelOrderOutput;
         }
-
-        private IEnumerable<ISizeParcel> GetParcelTypeBySizes(IEnumerable<ParcelOrderItem> sizes) =>
-            sizes.Select(itm => _parcelClassifier.ClassifyParcelBySize(itm.Size)).ToList();
     }
 }

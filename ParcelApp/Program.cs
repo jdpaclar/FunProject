@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using ParcelApp.Business;
 using ParcelApp.Business.Interface;
 using ParcelApp.Common;
+using ParcelApp.Common.Constants;
 using ParcelApp.Common.Interface;
 using ParcelApp.Contract;
 using ParcelApp.Contract.WeightBasedParcels;
@@ -32,6 +33,10 @@ namespace ParcelApp
                 {
                     new ParcelOrderItem(9, 1, CalculationType.BySize),
                     new ParcelOrderItem(49, 50, CalculationType.BySize),
+                    new ParcelOrderItem(51, 100, CalculationType.BySize),
+                    new ParcelOrderItem(101, 1000, CalculationType.BySize),
+                    new ParcelOrderItem(101, 50, CalculationType.ByWeight),
+                    new ParcelOrderItem(101, 51, CalculationType.ByWeight),
                 }
             });
             

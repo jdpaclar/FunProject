@@ -6,5 +6,6 @@ namespace ParcelApp.Business.Interface
     public interface ICostCalculator
     {
         decimal GetTotalCost(IEnumerable<ParcelOrderItem> parcelOrder);
+        
     }
 }

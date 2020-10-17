@@ -1,5 +1,6 @@
 using System;
 using ParcelApp.Common;
+using ParcelApp.Common.Constants;
 using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Business.Test.Helpers
@@ -9,8 +10,10 @@ namespace ParcelApp.Business.Test.Helpers
         public double Min { get; } = 5;
         public double Max { get; } = 6;
         public decimal Cost { get; } = 11m;
-        public ParcelTypes ParcelType { get; } = ParcelTypes.Small;
+        public string ParcelType { get; } = ParcelTypes.Small.ToString();
         public double WeightLimit { get; } = 1;
+        
+        public DiscountTypes DiscountTypes { get; } = DiscountTypes.Small;
     }
     
     public class MockSomethingLargeSizeParcel : ISizeParcel
@@ -18,8 +21,9 @@ namespace ParcelApp.Business.Test.Helpers
         public double Min { get; } = 7;
         public double Max { get; } = 8;
         public decimal Cost { get; } = 11.5m;
-        public ParcelTypes ParcelType { get; } = ParcelTypes.Large;
+        public string ParcelType { get; } = ParcelTypes.Large.ToString();
         public double WeightLimit { get; }
+        public DiscountTypes DiscountTypes { get; } = DiscountTypes.NotSupported;
     }
 
     public class MockWeightBasedParcel : IWeightParcel
@@ -28,6 +32,7 @@ namespace ParcelApp.Business.Test.Helpers
         public double Max { get; } = 50;
         public decimal OverCharge { get; } = 1m;
         public decimal InitialCost { get; } = 50m;
+        public DiscountTypes DiscountTypes { get; } = DiscountTypes.NotSupported;
     }
 
     public class MockMediumParcel : ISizeParcel
@@ -36,7 +41,9 @@ namespace ParcelApp.Business.Test.Helpers
         public double Max { get; } = 49;
         public decimal Cost { get; } = 8m;
 
-        public ParcelTypes ParcelType { get; } = ParcelTypes.Medium;
+        public string ParcelType { get; } = ParcelTypes.Medium.ToString();
         public double WeightLimit { get; } = 3;
+        
+        public DiscountTypes DiscountTypes { get; } = DiscountTypes.Medium;
     }
 }
