@@ -1,0 +1,12 @@
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/bin/Debug/netcoreapp3.1/ParcelApp.Business.deps.json
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/bin/Debug/netcoreapp3.1/ParcelApp.Business.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/bin/Debug/netcoreapp3.1/ParcelApp.Business.pdb
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/bin/Debug/netcoreapp3.1/ParcelApp.Common.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/bin/Debug/netcoreapp3.1/ParcelApp.Common.pdb
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.csprojAssemblyReference.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.AssemblyInfoInputs.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.AssemblyInfo.cs
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.csproj.CoreCompileInputs.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.csproj.CopyComplete
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/Debug/netcoreapp3.1/ParcelApp.Business.pdb

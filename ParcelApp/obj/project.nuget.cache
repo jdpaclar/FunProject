@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "WP35FKYxHK/TvLSV3ihPMrBIaznGLkaqC+wtCvRarBBeL+YrpCuh2v+YDL9FpZVCzYQOVEGOmVhaZ9NfmzAjEQ==",
+  "success": true,
+  "projectFilePath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp/ParcelApp.csproj",
+  "expectedPackageFiles": [
+    "/Users/jesse.paclar/.nuget/packages/microsoft.extensions.dependencyinjection/5.0.0-rc.2.20475.5/microsoft.extensions.dependencyinjection.5.0.0-rc.2.20475.5.nupkg.sha512",
+    "/Users/jesse.paclar/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/5.0.0-rc.2.20475.5/microsoft.extensions.dependencyinjection.abstractions.5.0.0-rc.2.20475.5.nupkg.sha512"
+  ],
+  "logs": []
+}
