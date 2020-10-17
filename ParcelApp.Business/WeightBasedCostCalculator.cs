@@ -26,7 +26,7 @@ namespace ParcelApp.Business
                 return heavyType.InitialCost;
             
             var weightDifference = parcelOrderItem.Weight - weightLimit;
-            return heavyType.InitialCost + (decimal)weightDifference;
+            return heavyType.InitialCost + ((decimal)weightDifference * heavyType.OverCharge);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace ParcelApp.Business.Test
             // assert
             order.LineItems.Count.Should().Be(1);
             order.LineItems.Single().Cost.Should().Be(smallParcelType.Cost);
-            order.LineItems.Single().ParcelType.Should().Be(smallParcelType.ParcelType);
+            order.LineItems.Single().ParcelType.Should().Be(smallParcelType.ParcelType.ToString());
         }
         
         [Theory]
@@ -116,6 +116,38 @@ namespace ParcelApp.Business.Test
             // assert
             order.TotalCost.Should().Be(expectedTotal);
         }
+
+        // [Fact]
+        // public void ProperlyCompute_Discounts()
+        // {
+        //     // arrange
+        //     var mediumParcel = new MockMediumParcel();
+        //     var weightBasedParcel = new MockWeightBasedParcel();
+        //     
+        //     _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
+        //         .Returns(mediumParcel);
+        //
+        //     _mockParcelClassifier.Setup(p => p.ClassifyHeavyParcelByWeight(It.IsAny<double>()))
+        //         .Returns(weightBasedParcel);
+        //
+        //     var parcelOrder = new ParcelOrder
+        //     {
+        //         Speedy = isSpeedy,
+        //         ParcelOrderItems = new List<ParcelOrderItem>
+        //         {
+        //             new ParcelOrderItem(1, 2,  CalculationType.BySize),
+        //             new ParcelOrderItem(1, 1,  CalculationType.BySize),
+        //             new ParcelOrderItem(1, 50,  CalculationType.ByWeight),
+        //             new ParcelOrderItem(1, 51,  CalculationType.ByWeight)
+        //         }
+        //     };
+        //     
+        //     // act
+        //     var order = _parcelBuilder.BuildOrder(parcelOrder);
+        //
+        //     // assert
+        //     order.TotalCost.Should().Be(expectedTotal);
+        // }
 
         [Fact]
         public void ProperlyComputeWeightAddOn()

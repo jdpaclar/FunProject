@@ -24,7 +24,7 @@ namespace ParcelApp.Business
             var parcelTypes = GetParcelTypeBySizes(parcelOrder.ParcelOrderItems);
             parcelOrderOutput.LineItems = parcelTypes.Select(p => new ParcelOrderOutputItem
             {
-                ParcelType = p.ParcelType,
+                ParcelType = p.ParcelType.ToString(),
                 Cost = p.Cost
             }).ToList();
 

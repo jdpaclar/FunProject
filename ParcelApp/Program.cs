@@ -9,6 +9,7 @@ using ParcelApp.Business.Interface;
 using ParcelApp.Common;
 using ParcelApp.Common.Interface;
 using ParcelApp.Contract;
+using ParcelApp.Contract.WeightBasedParcels;
 
 namespace ParcelApp
 {
@@ -16,8 +17,6 @@ namespace ParcelApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            
             var serviceCollection = new ServiceCollection();
 
             ConfigureServices(serviceCollection);
@@ -44,14 +43,22 @@ namespace ParcelApp
         private static void ConfigureServices(IServiceCollection services)
         {
             // Configure Parcel Types
-            var parcelTypes = new List<ISizeParcel>
+            var sizeBasedParcels = new List<ISizeParcel>
             {
                 new SmallSizeParcel(),
-                new MediumSizeParcel()
+                new MediumSizeParcel(),
+                new LargeSizeParcel(),
+                new ExtraLargeSizeParcel()
             };
 
-            services.AddSingleton(parcelTypes);
-            
+            var weightBasedParcels = new List<IWeightParcel>
+            {
+                new HeavyParcel()
+            };
+
+            services.AddSingleton(sizeBasedParcels);
+            services.AddSingleton(weightBasedParcels);
+
             services
                 .AddSingleton<IParcelClassifier, ParcelClassifier>()
                 .AddSingleton<IOrderBuilder, ParcelOrderBuilder>();

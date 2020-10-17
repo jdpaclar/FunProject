@@ -7,8 +7,7 @@ namespace ParcelApp.Contract
         public double Min { get; } = 100;
         public double Max { get; } = double.MaxValue;
         public decimal Cost { get; } = 15m;
-        public string ParcelType { get; } = "XL";
-        
+        public ParcelTypes ParcelType { get; } = ParcelTypes.ExtraLarge;
         public double WeightLimit { get; } = 10;
     }
 }

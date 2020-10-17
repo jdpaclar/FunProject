@@ -9,7 +9,7 @@ namespace ParcelApp.Business.Test.Helpers
         public double Min { get; } = 5;
         public double Max { get; } = 6;
         public decimal Cost { get; } = 11m;
-        public string ParcelType { get; } = "Small";
+        public ParcelTypes ParcelType { get; } = ParcelTypes.Small;
         public double WeightLimit { get; } = 1;
     }
     
@@ -18,7 +18,7 @@ namespace ParcelApp.Business.Test.Helpers
         public double Min { get; } = 7;
         public double Max { get; } = 8;
         public decimal Cost { get; } = 11.5m;
-        public string ParcelType { get; } = "Medium";
+        public ParcelTypes ParcelType { get; } = ParcelTypes.Large;
         public double WeightLimit { get; }
     }
 
@@ -28,5 +28,15 @@ namespace ParcelApp.Business.Test.Helpers
         public double Max { get; } = 50;
         public decimal OverCharge { get; } = 1m;
         public decimal InitialCost { get; } = 50m;
+    }
+
+    public class MockMediumParcel : ISizeParcel
+    {
+        public double Min { get; } = 10;
+        public double Max { get; } = 49;
+        public decimal Cost { get; } = 8m;
+
+        public ParcelTypes ParcelType { get; } = ParcelTypes.Medium;
+        public double WeightLimit { get; } = 3;
     }
 }
