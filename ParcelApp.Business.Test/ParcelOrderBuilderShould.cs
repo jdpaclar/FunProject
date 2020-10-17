@@ -74,5 +74,30 @@ namespace ParcelApp.Business.Test
             // assert
             order.TotalCost.Should().Be(expectedTotalCost);
         }
+
+        [Fact]
+        public void ProperlyComputeWeightAddOn()
+        {
+            // arrange
+            var smallParcelType = new MockSomethingSmallParcel();
+            
+            _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
+                .Returns(smallParcelType);
+            
+            var parcelOrder = new ParcelOrder
+            {
+                ParcelOrderItems = new List<ParcelOrderItem>
+                {
+                    new ParcelOrderItem(5, 2),
+                    new ParcelOrderItem(5, 1)
+                }
+            };
+            
+            // act
+            var order = _parcelBuilder.BuildOrder(parcelOrder);
+
+            // assert
+            order.TotalCost.Should().Be(24);
+        }
     }
 }
