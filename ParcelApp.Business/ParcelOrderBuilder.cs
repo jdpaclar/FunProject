@@ -13,25 +13,28 @@ namespace ParcelApp.Business
     public class ParcelOrderBuilder : IOrderBuilder
     {
         private readonly IParcelClassifier _parcelClassifier;
+        private readonly IDiscountCalculator _discountCalculator;
 
-        public ParcelOrderBuilder(IParcelClassifier parcelClassifier)
+        public ParcelOrderBuilder(IParcelClassifier parcelClassifier, IDiscountCalculator discountCalculator)
         {
             _parcelClassifier = parcelClassifier;
+            _discountCalculator = discountCalculator;
         }
         
         public ParcelOrderOutput BuildOrder(ParcelOrder parcelOrder)
         {
+            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
+                throw new Exception("Invalid Process.");
+            
             var parcelOrderOutput = new ParcelOrderOutput();
             
             var parcelBySize = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.BySize));
             var parcelByWeight = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.ByWeight));
             
-            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
-                throw new Exception("Invalid Process.");
             
             if (parcelBySize.Any())
             {
-                var lineOutputItems = parcelBySize.Select(s =>
+                var lineOutputItems = parcelBySize.Select( s =>
                 {
                     var config = _parcelClassifier.ClassifyParcelBySize(s.Size);
                     var cost = SizeBasedCalculator.GetCostPerLine(s.Weight, config);
@@ -39,7 +42,8 @@ namespace ParcelApp.Business
                     return new ParcelOrderOutputItem
                     {
                         ParcelType = config.ParcelType,
-                        Cost = cost
+                        Cost = cost,
+                        DiscountTypes = config.DiscountTypes
                     };
                 });
                 
@@ -57,7 +61,8 @@ namespace ParcelApp.Business
                     return new ParcelOrderOutputItem
                     {
                         ParcelType = "HeavyParcel",
-                        Cost = cost
+                        Cost = cost,
+                        DiscountTypes = config.DiscountTypes
                     };
                 });
                 
@@ -65,6 +70,24 @@ namespace ParcelApp.Business
                 parcelOrderOutput.TotalCost += lineOutputItems.Select(i => i.Cost).Sum();
             }
 
+            // apply discounts
+            if (parcelOrder.DiscountToApply.Any())
+            {
+                AppliedDiscount discount;
+                
+                if (parcelOrder.DiscountToApply.Contains(DiscountTypes.Mixed))
+                {
+                    discount = _discountCalculator.CalculateMixedDiscount(parcelOrderOutput.LineItems);
+                }
+                else
+                {
+                    discount = _discountCalculator.CalculateDiscount(parcelOrderOutput.LineItems);
+                }
+
+                parcelOrderOutput.TotalCost = discount.TotalCost;
+                parcelOrderOutput.TotalSaved = discount.SavedCost;
+            }
+            
             if (parcelOrder.Speedy)
                 parcelOrderOutput.TotalCost *= 2;
 

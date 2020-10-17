@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ParcelApp.Common;
@@ -8,71 +9,86 @@ using ParcelApp.Common.Constants;
 
 namespace ParcelApp.Business
 {
-    // public class DiscountCalculator
-    // {
-    //     private readonly IEnumerable<IDiscount> _configuredDiscounts;
-    //     private readonly IParcelClassifier _parcelClassifier;
-    //
-    //     public DiscountCalculator(IEnumerable<IDiscount> configuredDiscounts, IParcelClassifier parcelClassifier)
-    //     {
-    //         _configuredDiscounts = configuredDiscounts;
-    //         _parcelClassifier = parcelClassifier;
-    //     }
-    //
-    //     public AppliedDiscount CalculateDiscount(IEnumerable<ParcelOrderItem> parcelOrderItems)
-    //     {
-    //         // apply simple discount
-    //         var simpleDiscount = _configuredDiscounts.Where(d => !d.DiscountTypes.Equals(DiscountTypes.Mixed));
-    //         
-    //         var parcelMatchedGrouped = parcelOrderItems.Select(items =>
-    //         {
-    //             var parcelType = "";
-    //             DiscountTypes discountType; 
-    //
-    //             if (items.CalculationType.Equals(CalculationType.BySize))
-    //             {
-    //                 var config = _parcelClassifier.ClassifyParcelBySize(items.Size);
-    //                 parcelType = config.ParcelType;
-    //                 discountType = config.DiscountTypes;
-    //             }
-    //             else
-    //             {
-    //                 var config = _parcelClassifier.ClassifyHeavyParcelByWeight(items.Weight);
-    //                 discountType = config.DiscountTypes;
-    //             }
-    //
-    //             return new
-    //             {
-    //                 Size = items.Size,
-    //                 Weight = items.Weight,
-    //                 ParcelType = parcelType,
-    //                 DiscountTypes = discountType
-    //             };
-    //         }).GroupBy(grp => new { grp.ParcelType, grp.DiscountTypes});
-    //
-    //         parcelMatchedGrouped.ToList().ForEach(grp =>
-    //         {
-    //             var discountType = grp.Select(g => g.DiscountTypes).Single();
-    //             // if not single somethings wrong
-    //
-    //             var discountConfig = simpleDiscount.Single(s => s.DiscountTypes.Equals(discountType));
-    //             var limit = discountConfig.Limit;
-    //             
-    //             
-    //
-    //         });
-    //
-    //         // validate multiple discounts configured
-    //         simpleDiscount.ToList().ForEach(discountConfig =>
-    //         {
-    //             var discountType = discountConfig.DiscountTypes;
-    //
-    //            
-    //                 
-    //         });
-    //         
-    //             
-    //         // apply mixed logic
-    //     }
-    // }
+    public interface IDiscountCalculator
+    {
+        AppliedDiscount CalculateMixedDiscount(IEnumerable<ParcelOrderOutputItem> items);
+        AppliedDiscount CalculateDiscount(IEnumerable<ParcelOrderOutputItem> items);
+    }
+    public class DiscountCalculator: IDiscountCalculator
+    {
+        private readonly List<IDiscount> _configuredDiscounts;
+
+        public DiscountCalculator(List<IDiscount> configuredDiscounts)
+        {
+            _configuredDiscounts = configuredDiscounts;
+        }
+
+        public AppliedDiscount CalculateMixedDiscount(IEnumerable<ParcelOrderOutputItem> items)
+        {
+            var appliedDiscount = new AppliedDiscount
+            {
+                TotalCost = items.Select(i => i.Cost).Sum()
+            };
+            
+            var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(DiscountTypes.Mixed))).Single();
+            var totalCounts = items.Count();
+
+            var groups = Math.Abs(totalCounts / discountRule.Limit);
+            if (groups <= 0) return appliedDiscount;
+            var i = 0;
+
+            var modifiedGroup = items;
+                    
+            do
+            {
+                var min = modifiedGroup.Select(m => m.Cost).Min();
+                appliedDiscount.SavedCost += min;
+                appliedDiscount.TotalCost -= min;
+                modifiedGroup = modifiedGroup.Where(c => !c.Cost.Equals(min)).ToList();
+                i += 1;
+            } while (i < groups);
+
+            return appliedDiscount;
+        }
+
+        public AppliedDiscount CalculateDiscount(IEnumerable<ParcelOrderOutputItem> items)
+        {
+            var appliedDiscount = new AppliedDiscount
+            {
+                TotalCost = items.Select(i => i.Cost).Sum()
+            };
+
+            var groupedByParcelDiscountType = items.GroupBy(g => new
+            {
+                g.DiscountTypes,
+                g.ParcelType
+            });
+            
+            groupedByParcelDiscountType.ToList().ForEach(grp =>
+            {
+                var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(grp.Key.DiscountTypes))).Single();
+
+                var totalCounts = grp.Count();
+
+                var groups = Math.Abs(totalCounts / discountRule.Limit);
+
+                if (groups <= 0) return;
+                
+                var i = 0;
+
+                IEnumerable<ParcelOrderOutputItem> modifiedGroup = grp;
+                    
+                do
+                {
+                    var min = modifiedGroup.Select(m => m.Cost).Min();
+                    appliedDiscount.SavedCost += min;
+                    appliedDiscount.TotalCost -= min;
+                    modifiedGroup = grp.Where(c => !c.Cost.Equals(min)).ToList();
+                    i += 1;
+                } while (i < groups);
+            });
+            
+            return appliedDiscount;
+        }
+    }
 }

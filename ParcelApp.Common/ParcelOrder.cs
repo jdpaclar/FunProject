@@ -7,6 +7,7 @@ namespace ParcelApp.Common
     {
         public bool Speedy { get; set; }
 
+        public List<DiscountTypes> DiscountToApply { get; set; } = new List<DiscountTypes>();
         public List<ParcelOrderItem> ParcelOrderItems { get; set; }
     }
 
