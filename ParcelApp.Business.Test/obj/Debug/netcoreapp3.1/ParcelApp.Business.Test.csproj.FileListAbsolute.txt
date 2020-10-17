@@ -206,3 +206,5 @@
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/Debug/netcoreapp3.1/ParcelApp.Business.Test.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/Debug/netcoreapp3.1/ParcelApp.Business.Test.pdb
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/Debug/netcoreapp3.1/ParcelApp.Business.Test.genruntimeconfig.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Castle.Core.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Moq.dll

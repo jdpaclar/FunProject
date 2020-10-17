@@ -25,7 +25,7 @@ namespace ParcelApp.Business
                 parcelOrderOutput.LineItems.Add(parcel);
             });
 
-            parcelOrderOutput.TotalCost = CalculateTotalCost(parcelOrderOutput.LineItems);
+            parcelOrderOutput.TotalCost = CalculateTotalCost(parcelOrderOutput.LineItems, parcelOrder.Speedy);
             
             return parcelOrderOutput;
         }
