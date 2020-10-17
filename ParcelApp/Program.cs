@@ -44,10 +44,10 @@ namespace ParcelApp
         private static void ConfigureServices(IServiceCollection services)
         {
             // Configure Parcel Types
-            var parcelTypes = new List<IParcel>
+            var parcelTypes = new List<ISizeParcel>
             {
-                new SmallParcel(),
-                new MediumParcel()
+                new SmallSizeParcel(),
+                new MediumSizeParcel()
             };
 
             services.AddSingleton(parcelTypes);

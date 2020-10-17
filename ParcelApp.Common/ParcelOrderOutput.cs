@@ -5,7 +5,7 @@ namespace ParcelApp.Common
     public class ParcelOrderOutput
     {
         public List<ParcelOrderOutputItem> LineItems { get; set; } = new List<ParcelOrderOutputItem>();
-        public decimal TotalCost { get; set; }
+        public decimal TotalCost { get; set; } = 0m;
     }
 
     public class ParcelOrderOutputItem

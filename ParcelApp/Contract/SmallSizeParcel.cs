@@ -3,7 +3,7 @@ using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Contract
 {
-    public class SmallParcel : IParcel
+    public class SmallSizeParcel : ISizeParcel
     {
         public double Min { get; } = 0;
         public double Max { get; } = 9;

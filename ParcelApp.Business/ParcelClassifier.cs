@@ -8,14 +8,16 @@ namespace ParcelApp.Business
 {
     public class ParcelClassifier : IParcelClassifier
     {
-        private readonly List<IParcel> _definedParcels;
-        
-        public ParcelClassifier(List<IParcel> definedParcels)
+        private readonly List<ISizeParcel> _definedParcels;
+        private readonly List<IWeightParcel> _definedHeavyParcels;
+
+        public ParcelClassifier(List<ISizeParcel> definedParcels, List<IWeightParcel> definedHeavyParcels)
         {
             _definedParcels = definedParcels;
+            _definedHeavyParcels = definedHeavyParcels;
         }
 
-        public IParcel ClassifyParcelBySize(double size)
+        public ISizeParcel ClassifyParcelBySize(double size)
         {
             var parcel = _definedParcels;
             
@@ -27,6 +29,21 @@ namespace ParcelApp.Business
             if (identifiedParcel == null)
                 throw new NotSupportedException("Not Supported Parcel Configuration.");
             
+            return identifiedParcel;
+        }
+
+        public IWeightParcel ClassifyHeavyParcelByWeight(double weight)
+        {
+            var heavyParcel = _definedHeavyParcels;
+
+            if (!heavyParcel.Any())
+                throw new Exception("No Heavy Parcel Configured.");
+            
+            var identifiedParcel = heavyParcel.SingleOrDefault(p => weight >= p.Min && weight <= p.Max);
+            
+            if (identifiedParcel == null)
+                throw new NotSupportedException("Not Supported Heavy Parcel Configuration.");
+
             return identifiedParcel;
         }
     }

@@ -24,7 +24,7 @@ namespace ParcelApp.Business.Test
         public void ProperlyGenerateOrderLines()
         {
             // arrange
-            var smallParcelType = new MockSomethingSmallParcel();
+            var smallParcelType = new MockSomethingSmallSizeParcel();
             
             _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
                 .Returns(smallParcelType);
@@ -53,7 +53,7 @@ namespace ParcelApp.Business.Test
         public void ProperlyComputeCost(bool isSpeedy, decimal expectedTotalCost)
         {
             // arrange
-            var smallParcelType = new MockSomethingSmallParcel();
+            var smallParcelType = new MockSomethingSmallSizeParcel();
             
             _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
                 .Returns(smallParcelType);
@@ -63,7 +63,7 @@ namespace ParcelApp.Business.Test
                 Speedy = isSpeedy,
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(5, 1)
+                    new ParcelOrderItem(5, 1, true)
                 }
             };
             
@@ -79,7 +79,7 @@ namespace ParcelApp.Business.Test
         public void ProperlyComputeWeightAddOn()
         {
             // arrange
-            var smallParcelType = new MockSomethingSmallParcel();
+            var smallParcelType = new MockSomethingSmallSizeParcel();
             
             _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
                 .Returns(smallParcelType);
@@ -88,8 +88,8 @@ namespace ParcelApp.Business.Test
             {
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(5, 2),
-                    new ParcelOrderItem(5, 1)
+                    new ParcelOrderItem(5, 2, true),
+                    new ParcelOrderItem(5, 1, true)
                 }
             };
             
