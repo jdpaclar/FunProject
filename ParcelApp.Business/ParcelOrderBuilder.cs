@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ParcelApp.Business.Interface;
 using ParcelApp.Common;
+using ParcelApp.Common.Interface;
+using ParcelApp.Business;
 
 namespace ParcelApp.Business
 {
@@ -19,41 +21,53 @@ namespace ParcelApp.Business
         {
             var parcelOrderOutput = new ParcelOrderOutput();
             
-            parcelOrder.ParcelSizes.ForEach(size =>
+            var parcelTypes = GetParcelTypeBySizes(parcelOrder.ParcelOrderItems);
+            parcelOrderOutput.LineItems = parcelTypes.Select(p => new ParcelOrderOutputItem
             {
-                var parcel = GenerateParcelOrderOutputItem(size);
-                parcelOrderOutput.LineItems.Add(parcel);
-            });
-
-            parcelOrderOutput.TotalCost = CalculateTotalCost(parcelOrderOutput.LineItems, parcelOrder.Speedy);
+                ParcelType = p.ParcelType,
+                Cost = p.Cost
+            }).ToList();
+            
+            parcelOrderOutput.TotalCost = CalculateTotalCost(parcelOrder);
+            parcelOrderOutput.TotalCost += CalculateWeightAddOn(parcelOrder.ParcelOrderItems);
             
             return parcelOrderOutput;
         }
 
-        private decimal CalculateTotalCost(IReadOnlyList<ParcelOrderOutputItem> parcelOrderOutputItems, bool isSpeedy = false)
+        private decimal CalculateWeightAddOn(IReadOnlyList<ParcelOrderItem> parcelOrderItems)
+        {
+            if (!parcelOrderItems.HaveValidParcelItems())
+                return 0m;
+            
+            return parcelOrderItems.Select(oi =>
+            {
+                var addOn = 0m;
+                var parcelType = _parcelClassifier.ClassifyParcelBySize(oi.Size);
+                var weightLimit = parcelType.WeightLimit;
+        
+                if (oi.Weight > weightLimit)
+                    addOn += 2m;
+        
+                return addOn;
+            }).Sum();
+        }
+
+        private decimal CalculateTotalCost(ParcelOrder parcelOrder)
         {
             var totalCost = 0m;
+
+            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
+                return totalCost;
             
-            if (!parcelOrderOutputItems.Any())
-                throw new ArgumentException("No Parcel Order Line Specified.");
+            totalCost = parcelOrder.ParcelOrderItems.Select(po => _parcelClassifier.ClassifyParcelBySize(po.Size).Cost).Sum();
 
-            totalCost = parcelOrderOutputItems.Select(po => po.Cost).Sum();
-
-            if (isSpeedy)
+            if (parcelOrder.Speedy)
                 totalCost *= 2;
 
             return totalCost;
         }
-
-        private ParcelOrderOutputItem GenerateParcelOrderOutputItem(double parcelSize)
-        {
-            var parcelClassification = _parcelClassifier.ClassifyParcelBySize(parcelSize);
-            
-            return new ParcelOrderOutputItem
-            {
-                ParcelType = parcelClassification.ParcelType,
-                Cost = parcelClassification.Cost
-            };
-        }
+        
+        private IEnumerable<IParcel> GetParcelTypeBySizes(IEnumerable<ParcelOrderItem> sizes) =>
+            sizes.Select(itm => _parcelClassifier.ClassifyParcelBySize(itm.Size)).ToList();
     }
 }

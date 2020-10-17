@@ -5,7 +5,19 @@ namespace ParcelApp.Common
     public class ParcelOrder
     {
         public bool Speedy { get; set; }
+
+        public List<ParcelOrderItem> ParcelOrderItems { get; set; }
+    }
+
+    public class ParcelOrderItem
+    {
+        public ParcelOrderItem(double size, double weight)
+        {
+            Size = size;
+            Weight = weight;
+        }
         
-        public List<int> ParcelSizes { get; set; }
+        public double Size { get; }
+        public double Weight { get; }
     }
 }

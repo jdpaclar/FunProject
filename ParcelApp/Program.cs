@@ -29,7 +29,11 @@ namespace ParcelApp
             var order = worker?.BuildOrder(new ParcelOrder
             {
                 Speedy = true,
-                ParcelSizes = new [] { 9, 49 }.ToList()
+                ParcelOrderItems = new List<ParcelOrderItem>
+                {
+                    new ParcelOrderItem(9, 1),
+                    new ParcelOrderItem(49, 50),
+                }
             });
             
             PrintOutput(order);
