@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ParcelApp.Business;
 using ParcelApp.Business.Interface;
 using ParcelApp.Common;
+using ParcelApp.Common.Interface;
 using ParcelApp.Contract;
 
 namespace ParcelApp

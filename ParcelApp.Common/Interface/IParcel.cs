@@ -1,4 +1,4 @@
-namespace ParcelApp.Common
+namespace ParcelApp.Common.Interface
 {
      public interface IParcel
      {

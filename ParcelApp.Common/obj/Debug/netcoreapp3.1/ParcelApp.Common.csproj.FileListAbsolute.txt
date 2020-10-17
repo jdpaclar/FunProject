@@ -7,3 +7,12 @@
 /Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.csproj.CoreCompileInputs.cache
 /Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.pdb
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/bin/Debug/netcoreapp3.1/ParcelApp.Common.deps.json
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/bin/Debug/netcoreapp3.1/ParcelApp.Common.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/bin/Debug/netcoreapp3.1/ParcelApp.Common.pdb
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.csprojAssemblyReference.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.AssemblyInfoInputs.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.AssemblyInfo.cs
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.csproj.CoreCompileInputs.cache
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/Debug/netcoreapp3.1/ParcelApp.Common.pdb

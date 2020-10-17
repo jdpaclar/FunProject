@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj": {}
+    "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj": {}
   },
   "projects": {
-    "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj": {
+    "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj",
+        "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj",
         "projectName": "ParcelApp.Business",
-        "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj",
+        "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj",
         "packagesPath": "/Users/jesse.paclar/.nuget/packages/",
-        "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/obj/",
+        "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -28,8 +28,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj": {
-                "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj"
+              "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj": {
+                "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj"
               }
             }
           }
@@ -61,14 +61,14 @@
         }
       }
     },
-    "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj": {
+    "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj",
+        "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj",
         "projectName": "ParcelApp.Common",
-        "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj",
+        "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj",
         "packagesPath": "/Users/jesse.paclar/.nuget/packages/",
-        "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/obj/",
+        "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

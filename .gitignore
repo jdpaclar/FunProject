@@ -1,0 +1,15 @@
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+.vs/
+.vs
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+.user
+*.user
+mysql-volume
+Tools/coverage.json
+PS-Collaboration-Service.sln.DotSettings.user
+.idea
+.DS_Store

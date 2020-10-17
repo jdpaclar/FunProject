@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj",
+    "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj",
     "projectName": "ParcelApp.Common",
-    "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj",
-    "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/obj/",
+    "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj",
+    "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

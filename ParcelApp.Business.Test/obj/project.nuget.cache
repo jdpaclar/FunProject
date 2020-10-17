@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Gj+Yo1WIoKZ2WU++R7pV8ZKAhD0dxUzNEqxAT5+ZqceURxzYrjMr1o/j0Kl3JiQULJdWwkx9vRZKzuGvaBPZfQ==",
+  "dgSpecHash": "3D78DR/jMHNOfUVlwWzxRLIiej6WrJM3TJN/NL4mVhlqrnozJlKHxNUiruvsAVzc+ZTD5nUNnHNlkZ47ATGguw==",
   "success": true,
-  "projectFilePath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business.Test/ParcelApp.Business.Test.csproj",
+  "projectFilePath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/ParcelApp.Business.Test.csproj",
   "expectedPackageFiles": [
     "/Users/jesse.paclar/.nuget/packages/coverlet.collector/1.2.0/coverlet.collector.1.2.0.nupkg.sha512",
     "/Users/jesse.paclar/.nuget/packages/fluentassertions/6.0.0-alpha0001/fluentassertions.6.0.0-alpha0001.nupkg.sha512",
