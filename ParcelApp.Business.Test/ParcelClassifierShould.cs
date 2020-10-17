@@ -14,20 +14,20 @@ namespace ParcelApp.Business.Test
         
         public ParcelClassifierShould()
         {
-            var definedParcelTypes = new List<IParcel>
+            var definedParcelTypes = new List<ISizeParcel>
             {
-                new MockSomethingSmallParcel(),
-                new MockSomethingLargeParcel()
+                new MockSomethingSmallSizeParcel(),
+                new MockSomethingLargeSizeParcel()
             };
             
-            _parcelClassifier = new ParcelClassifier(definedParcelTypes);
+            _parcelClassifier = new ParcelClassifier(definedParcelTypes, new List<IWeightParcel>());
         }
 
         [Fact]
         public void FailLoudly_When_NoParcelRule_IsDefined()
         {
             // arrange
-            var parcelClassifier = new ParcelClassifier(new List<IParcel>());
+            var parcelClassifier = new ParcelClassifier(new List<ISizeParcel>(), new List<IWeightParcel>());
             
             // Act
             var exception = Assert.Throws<Exception>(() => parcelClassifier.ClassifyParcelBySize(double.MaxValue));
@@ -49,7 +49,7 @@ namespace ParcelApp.Business.Test
         public void ProperlyDetermine_CorrectCost_By_ParcelSize()
         {
             // arrange
-            var smallParcel = new MockSomethingSmallParcel();
+            var smallParcel = new MockSomethingSmallSizeParcel();
             
             // act
             var parcel = _parcelClassifier.ClassifyParcelBySize(5);

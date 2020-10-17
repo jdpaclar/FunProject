@@ -11,13 +11,21 @@ namespace ParcelApp.Common
 
     public class ParcelOrderItem
     {
-        public ParcelOrderItem(double size, double weight)
+        public ParcelOrderItem(double size, double weight, CalculationType calculationType)
         {
             Size = size;
             Weight = weight;
+            CalculationType = calculationType;
         }
         
         public double Size { get; }
         public double Weight { get; }
+        public CalculationType CalculationType { get; }
+    }
+
+    public enum CalculationType
+    {
+        BySize,
+        ByWeight
     }
 }

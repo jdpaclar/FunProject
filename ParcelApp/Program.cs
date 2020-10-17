@@ -31,8 +31,8 @@ namespace ParcelApp
                 Speedy = true,
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(9, 1),
-                    new ParcelOrderItem(49, 50),
+                    new ParcelOrderItem(9, 1, CalculationType.BySize),
+                    new ParcelOrderItem(49, 50, CalculationType.BySize),
                 }
             });
             
@@ -44,10 +44,10 @@ namespace ParcelApp
         private static void ConfigureServices(IServiceCollection services)
         {
             // Configure Parcel Types
-            var parcelTypes = new List<IParcel>
+            var parcelTypes = new List<ISizeParcel>
             {
-                new SmallParcel(),
-                new MediumParcel()
+                new SmallSizeParcel(),
+                new MediumSizeParcel()
             };
 
             services.AddSingleton(parcelTypes);

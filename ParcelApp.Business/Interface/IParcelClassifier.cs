@@ -5,6 +5,7 @@ namespace ParcelApp.Business.Interface
 {
     public interface IParcelClassifier
     {
-        IParcel ClassifyParcelBySize(double size);
+        ISizeParcel ClassifyParcelBySize(double size);
+        IWeightParcel ClassifyHeavyParcelByWeight(double weight);
     }
 }

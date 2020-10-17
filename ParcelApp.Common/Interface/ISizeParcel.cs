@@ -1,6 +1,6 @@
 namespace ParcelApp.Common.Interface
 {
-     public interface IParcel
+     public interface ISizeParcel
      {
          public double Min { get; }
          public double Max { get; }

@@ -27,47 +27,34 @@ namespace ParcelApp.Business
                 ParcelType = p.ParcelType,
                 Cost = p.Cost
             }).ToList();
-            
-            parcelOrderOutput.TotalCost = CalculateTotalCost(parcelOrder);
-            parcelOrderOutput.TotalCost += CalculateWeightAddOn(parcelOrder.ParcelOrderItems);
-            
+
+            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
+                throw new Exception("Invalid Process.");
+
+            var parcelBySize = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.BySize));
+            var parcelByWeight = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.ByWeight));
+
+            ICostCalculator calculator;
+
+            if (parcelBySize.Any())
+            {
+                calculator = new SizeBasedCostCalculator(_parcelClassifier);
+                parcelOrderOutput.TotalCost += calculator.GetTotalCost(parcelBySize);
+            }
+
+            if (parcelByWeight.Any())
+            {
+                calculator = new WeightBasedCostCalculator(_parcelClassifier);
+                parcelOrderOutput.TotalCost += calculator.GetTotalCost(parcelByWeight);
+            }
+
+            if (parcelOrder.Speedy)
+                parcelOrderOutput.TotalCost *= 2;
+
             return parcelOrderOutput;
         }
 
-        private decimal CalculateWeightAddOn(IReadOnlyList<ParcelOrderItem> parcelOrderItems)
-        {
-            if (!parcelOrderItems.HaveValidParcelItems())
-                return 0m;
-            
-            return parcelOrderItems.Select(oi =>
-            {
-                var addOn = 0m;
-                var parcelType = _parcelClassifier.ClassifyParcelBySize(oi.Size);
-                var weightLimit = parcelType.WeightLimit;
-        
-                if (oi.Weight > weightLimit)
-                    addOn += 2m;
-        
-                return addOn;
-            }).Sum();
-        }
-
-        private decimal CalculateTotalCost(ParcelOrder parcelOrder)
-        {
-            var totalCost = 0m;
-
-            if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
-                return totalCost;
-            
-            totalCost = parcelOrder.ParcelOrderItems.Select(po => _parcelClassifier.ClassifyParcelBySize(po.Size).Cost).Sum();
-
-            if (parcelOrder.Speedy)
-                totalCost *= 2;
-
-            return totalCost;
-        }
-        
-        private IEnumerable<IParcel> GetParcelTypeBySizes(IEnumerable<ParcelOrderItem> sizes) =>
+        private IEnumerable<ISizeParcel> GetParcelTypeBySizes(IEnumerable<ParcelOrderItem> sizes) =>
             sizes.Select(itm => _parcelClassifier.ClassifyParcelBySize(itm.Size)).ToList();
     }
 }

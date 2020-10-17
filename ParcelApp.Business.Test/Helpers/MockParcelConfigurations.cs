@@ -4,7 +4,7 @@ using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Business.Test.Helpers
 {
-    public class MockSomethingSmallParcel : IParcel
+    public class MockSomethingSmallSizeParcel : ISizeParcel
     {
         public double Min { get; } = 5;
         public double Max { get; } = 6;
@@ -13,7 +13,7 @@ namespace ParcelApp.Business.Test.Helpers
         public double WeightLimit { get; } = 1;
     }
     
-    public class MockSomethingLargeParcel : IParcel
+    public class MockSomethingLargeSizeParcel : ISizeParcel
     {
         public double Min { get; } = 7;
         public double Max { get; } = 8;
@@ -22,12 +22,11 @@ namespace ParcelApp.Business.Test.Helpers
         public double WeightLimit { get; }
     }
 
-    public class MockRidiculouslyLargeParcel : IParcel
+    public class MockWeightBasedParcel : IWeightParcel
     {
-        public double Min { get; } = double.MaxValue;
-        public double Max { get; } = double.MaxValue + 1;
-        public decimal Cost { get; } = decimal.MaxValue;
-        public string ParcelType { get; } = "BOOM!";
-        public double WeightLimit { get; }
+        public double Min { get; } = 0;
+        public double Max { get; } = 50;
+        public decimal OverCharge { get; } = 1m;
+        public decimal InitialCost { get; } = 50m;
     }
 }
