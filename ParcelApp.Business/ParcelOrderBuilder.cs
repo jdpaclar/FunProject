@@ -31,21 +31,21 @@ namespace ParcelApp.Business
             if (!parcelOrder.ParcelOrderItems.HaveValidParcelItems())
                 throw new Exception("Invalid Process.");
 
-            var parcelBySize = parcelOrder.ParcelOrderItems.Where(p => p.CalculateBySize);
-            var parcelByWeight = parcelOrder.ParcelOrderItems.Where(p => !p.CalculateBySize);
+            var parcelBySize = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.BySize));
+            var parcelByWeight = parcelOrder.ParcelOrderItems.Where(p => p.CalculationType.Equals(CalculationType.ByWeight));
 
             ICostCalculator calculator;
 
             if (parcelBySize.Any())
             {
                 calculator = new SizeBasedCostCalculator(_parcelClassifier);
-                parcelOrderOutput.TotalCost = calculator.GetTotalCost(parcelBySize);
+                parcelOrderOutput.TotalCost += calculator.GetTotalCost(parcelBySize);
             }
 
             if (parcelByWeight.Any())
             {
                 calculator = new WeightBasedCostCalculator(_parcelClassifier);
-                parcelOrderOutput.TotalCost = calculator.GetTotalCost(parcelBySize);
+                parcelOrderOutput.TotalCost += calculator.GetTotalCost(parcelByWeight);
             }
 
             if (parcelOrder.Speedy)
@@ -54,18 +54,6 @@ namespace ParcelApp.Business
             return parcelOrderOutput;
         }
 
-        private decimal CalculateWeightBasedCost(ParcelOrderItem parcelOrderItem)
-        {
-            var heavyType = _parcelClassifier.ClassifyHeavyParcelByWeight(parcelOrderItem.Weight);
-            var weightLimit = heavyType.Max;
-
-            if (parcelOrderItem.Weight <= weightLimit)
-                return heavyType.InitialCost;
-            
-            var weightDifference = parcelOrderItem.Weight - weightLimit;
-            return heavyType.InitialCost + (decimal)weightDifference;
-        }
-        
         private IEnumerable<ISizeParcel> GetParcelTypeBySizes(IEnumerable<ParcelOrderItem> sizes) =>
             sizes.Select(itm => _parcelClassifier.ClassifyParcelBySize(itm.Size)).ToList();
     }

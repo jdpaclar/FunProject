@@ -33,7 +33,7 @@ namespace ParcelApp.Business.Test
             {
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(5, 1)
+                    new ParcelOrderItem(5, 1, CalculationType.BySize)
                 },
             };
             
@@ -48,31 +48,73 @@ namespace ParcelApp.Business.Test
         }
         
         [Theory]
-        [InlineData(true, 22)]
-        [InlineData(false, 11)]
-        public void ProperlyComputeCost(bool isSpeedy, decimal expectedTotalCost)
+        [InlineData(5, 1, true, CalculationType.BySize, 22)]
+        [InlineData(5, 1,false, CalculationType.BySize, 11)]
+        [InlineData(5, 3,false, CalculationType.BySize, 13)]
+        [InlineData(5, 2, true, CalculationType.ByWeight, 100)]
+        [InlineData(5, 50, true, CalculationType.ByWeight, 100)]
+        [InlineData(5, 52, true, CalculationType.ByWeight, 104)]
+        [InlineData(5, 50, false, CalculationType.ByWeight, 50)]
+        public void ProperlyComputeCostBySize(double size, double weight, bool isSpeedy, CalculationType calculationType, decimal expectedTotalCost)
         {
             // arrange
             var smallParcelType = new MockSomethingSmallSizeParcel();
+            var weightBasedParcel = new MockWeightBasedParcel();
             
             _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
                 .Returns(smallParcelType);
-            
+
+            _mockParcelClassifier.Setup(p => p.ClassifyHeavyParcelByWeight(It.IsAny<double>()))
+                .Returns(weightBasedParcel);
+
             var parcelOrder = new ParcelOrder
             {
                 Speedy = isSpeedy,
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(5, 1, true)
+                    new ParcelOrderItem(size, weight,  calculationType)
                 }
             };
             
             // act
             var order = _parcelBuilder.BuildOrder(parcelOrder);
 
-
             // assert
             order.TotalCost.Should().Be(expectedTotalCost);
+        }
+
+        [Theory]
+        [InlineData(true, 250)]
+        [InlineData(false, 125)]
+        public void ProperlyCompute_CompoundOrders(bool isSpeedy, decimal expectedTotal)
+        {
+            // arrange
+            var smallParcelType = new MockSomethingSmallSizeParcel();
+            var weightBasedParcel = new MockWeightBasedParcel();
+            
+            _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
+                .Returns(smallParcelType);
+
+            _mockParcelClassifier.Setup(p => p.ClassifyHeavyParcelByWeight(It.IsAny<double>()))
+                .Returns(weightBasedParcel);
+
+            var parcelOrder = new ParcelOrder
+            {
+                Speedy = isSpeedy,
+                ParcelOrderItems = new List<ParcelOrderItem>
+                {
+                    new ParcelOrderItem(1, 2,  CalculationType.BySize),
+                    new ParcelOrderItem(1, 1,  CalculationType.BySize),
+                    new ParcelOrderItem(1, 50,  CalculationType.ByWeight),
+                    new ParcelOrderItem(1, 51,  CalculationType.ByWeight)
+                }
+            };
+            
+            // act
+            var order = _parcelBuilder.BuildOrder(parcelOrder);
+
+            // assert
+            order.TotalCost.Should().Be(expectedTotal);
         }
 
         [Fact]
@@ -88,8 +130,8 @@ namespace ParcelApp.Business.Test
             {
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(5, 2, true),
-                    new ParcelOrderItem(5, 1, true)
+                    new ParcelOrderItem(5, 2, CalculationType.BySize),
+                    new ParcelOrderItem(5, 1,  CalculationType.BySize)
                 }
             };
             

@@ -31,8 +31,8 @@ namespace ParcelApp
                 Speedy = true,
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
-                    new ParcelOrderItem(9, 1),
-                    new ParcelOrderItem(49, 50),
+                    new ParcelOrderItem(9, 1, CalculationType.BySize),
+                    new ParcelOrderItem(49, 50, CalculationType.BySize),
                 }
             });
             

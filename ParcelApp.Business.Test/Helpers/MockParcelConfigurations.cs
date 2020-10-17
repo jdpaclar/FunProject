@@ -22,12 +22,11 @@ namespace ParcelApp.Business.Test.Helpers
         public double WeightLimit { get; }
     }
 
-    public class MockRidiculouslyLargeSizeParcel : ISizeParcel
+    public class MockWeightBasedParcel : IWeightParcel
     {
-        public double Min { get; } = double.MaxValue;
-        public double Max { get; } = double.MaxValue + 1;
-        public decimal Cost { get; } = decimal.MaxValue;
-        public string ParcelType { get; } = "BOOM!";
-        public double WeightLimit { get; }
+        public double Min { get; } = 0;
+        public double Max { get; } = 50;
+        public decimal OverCharge { get; } = 1m;
+        public decimal InitialCost { get; } = 50m;
     }
 }
