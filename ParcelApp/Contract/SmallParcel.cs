@@ -1,0 +1,13 @@
+using ParcelApp.Common;
+
+namespace ParcelApp.Contract
+{
+    public class SmallParcel : IParcel
+    {
+        public double Min { get; } = 0;
+        public double Max { get; } = 9;
+        public decimal Cost { get; } = 3m;
+        public string ParcelType { get; } = "Small";
+    }
+
+}
