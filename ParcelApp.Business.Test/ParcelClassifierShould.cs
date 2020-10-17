@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using ParcelApp.Business.Interface;
 using ParcelApp.Business.Test.Helpers;
-using ParcelApp.Common;
 using Xunit;
 using FluentAssertions;
+using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Business.Test
 {

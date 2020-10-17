@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp/ParcelApp.csproj",
+    "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp/ParcelApp.csproj",
     "projectName": "ParcelApp",
-    "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp/ParcelApp.csproj",
-    "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp/obj/",
+    "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp/ParcelApp.csproj",
+    "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -18,11 +18,11 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj": {
-            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj"
+          "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj": {
+            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj"
           },
-          "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj": {
-            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj"
+          "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj": {
+            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj"
           }
         }
       }
@@ -39,6 +39,10 @@
         "Microsoft.Extensions.DependencyInjection": {
           "target": "Package",
           "version": "[5.0.0-rc.2.20475.5, )"
+        },
+        "Newtonsoft.Json": {
+          "target": "Package",
+          "version": "[9.0.1, )"
         }
       },
       "imports": [

@@ -1,10 +1,10 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business.Test/ParcelApp.Business.Test.csproj",
+    "projectUniqueName": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/ParcelApp.Business.Test.csproj",
     "projectName": "ParcelApp.Business.Test",
-    "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business.Test/ParcelApp.Business.Test.csproj",
-    "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business.Test/obj/",
+    "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/ParcelApp.Business.Test.csproj",
+    "outputPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
       "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -18,11 +18,11 @@
     "frameworks": {
       "netcoreapp3.1": {
         "projectReferences": {
-          "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj": {
-            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Business/ParcelApp.Business.csproj"
+          "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj": {
+            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business/ParcelApp.Business.csproj"
           },
-          "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj": {
-            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/ParcelApp/ParcelApp/ParcelApp.Common/ParcelApp.Common.csproj"
+          "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj": {
+            "projectPath": "/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Common/ParcelApp.Common.csproj"
           }
         }
       }
@@ -43,6 +43,10 @@
         "Microsoft.NET.Test.Sdk": {
           "target": "Package",
           "version": "[16.5.0, )"
+        },
+        "Moq": {
+          "target": "Package",
+          "version": "[4.14.7, )"
         },
         "coverlet.collector": {
           "target": "Package",

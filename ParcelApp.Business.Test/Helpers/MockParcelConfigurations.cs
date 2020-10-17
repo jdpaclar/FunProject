@@ -1,5 +1,6 @@
 using System;
 using ParcelApp.Common;
+using ParcelApp.Common.Interface;
 
 namespace ParcelApp.Business.Test.Helpers
 {

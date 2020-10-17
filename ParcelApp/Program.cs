@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using ParcelApp.Business;
 using ParcelApp.Business.Interface;
 using ParcelApp.Common;
+using ParcelApp.Common.Interface;
 using ParcelApp.Contract;
 
 namespace ParcelApp
@@ -21,11 +24,16 @@ namespace ParcelApp
             
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var worker = serviceProvider.GetService<IParcelClassifier>();
-            var tt = worker?.ClassifyParcelBySize(50);
+            var worker = serviceProvider.GetService<IOrderBuilder>();
             
-            Console.WriteLine($"Parcel Type { tt?.ParcelType }");
+            var order = worker?.BuildOrder(new ParcelOrder
+            {
+                Speedy = true,
+                ParcelSizes = new [] { 9, 49 }.ToList()
+            });
             
+            PrintOutput(order);
+
             serviceProvider.Dispose();
         }
 
@@ -41,7 +49,14 @@ namespace ParcelApp
             services.AddSingleton(parcelTypes);
             
             services
-                .AddSingleton<IParcelClassifier, ParcelClassifier>();
+                .AddSingleton<IParcelClassifier, ParcelClassifier>()
+                .AddSingleton<IOrderBuilder, ParcelOrderBuilder>();
+        }
+
+        private static void PrintOutput(ParcelOrderOutput parcelOrder)
+        {
+            var generatedOrder = JsonConvert.SerializeObject(parcelOrder);
+            Console.WriteLine(generatedOrder);
         }
     }
 }
