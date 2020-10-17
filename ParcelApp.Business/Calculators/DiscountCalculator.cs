@@ -1,19 +1,13 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using ParcelApp.Common;
-using ParcelApp.Common.Interface;
 using System.Linq;
 using ParcelApp.Business.Interface;
+using ParcelApp.Common;
 using ParcelApp.Common.Constants;
+using ParcelApp.Common.Interface;
 
-namespace ParcelApp.Business
+namespace ParcelApp.Business.Calculators
 {
-    public interface IDiscountCalculator
-    {
-        AppliedDiscount CalculateMixedDiscount(IEnumerable<ParcelOrderOutputItem> items);
-        AppliedDiscount CalculateDiscount(IEnumerable<ParcelOrderOutputItem> items);
-    }
     public class DiscountCalculator: IDiscountCalculator
     {
         private readonly List<IDiscount> _configuredDiscounts;
@@ -67,13 +61,10 @@ namespace ParcelApp.Business
             groupedByParcelDiscountType.ToList().ForEach(grp =>
             {
                 var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(grp.Key.DiscountTypes))).Single();
-
                 var totalCounts = grp.Count();
-
                 var groups = Math.Abs(totalCounts / discountRule.Limit);
 
                 if (groups <= 0) return;
-                
                 var i = 0;
 
                 IEnumerable<ParcelOrderOutputItem> modifiedGroup = grp;

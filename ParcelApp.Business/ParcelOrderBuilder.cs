@@ -5,7 +5,7 @@ using ParcelApp.Business.Interface;
 using ParcelApp.Common;
 using ParcelApp.Common.Interface;
 using ParcelApp.Business;
-using ParcelApp.Business.CostCalculators;
+using ParcelApp.Business.Calculators;
 using ParcelApp.Common.Constants;
 
 namespace ParcelApp.Business
