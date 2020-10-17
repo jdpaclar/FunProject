@@ -10,5 +10,6 @@ namespace ParcelApp.Contract
         public decimal Cost { get; } = 8m;
         
         public string ParcelType { get; } = "Medium";
+        public double WeightLimit { get; } = 3;
     }
 }

@@ -31,7 +31,10 @@ namespace ParcelApp.Business.Test
             
             var parcelOrder = new ParcelOrder
             {
-                ParcelSizes = new [] { 5 }.ToList()
+                ParcelOrderItems = new List<ParcelOrderItem>
+                {
+                    new ParcelOrderItem(5, 1)
+                },
             };
             
             // act
@@ -58,7 +61,10 @@ namespace ParcelApp.Business.Test
             var parcelOrder = new ParcelOrder
             {
                 Speedy = isSpeedy,
-                ParcelSizes = new [] { 5 }.ToList()
+                ParcelOrderItems = new List<ParcelOrderItem>
+                {
+                    new ParcelOrderItem(5, 1)
+                }
             };
             
             // act
