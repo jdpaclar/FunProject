@@ -5,5 +5,6 @@
     &lt;TestId&gt;xUnit::14074AC8-6568-4408-8E5B-91E7E9C38E29::.NETCoreApp,Version=v3.1::ParcelApp.Business.Test.ParcelOrderBuilderShould.ProperlyGenerateOrderLines&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::14074AC8-6568-4408-8E5B-91E7E9C38E29::.NETCoreApp,Version=v3.1::ParcelApp.Business.Test.ParcelOrderBuilderShould.ProperlyComputeCost&lt;/TestId&gt;
     &lt;TestId&gt;xUnit::14074AC8-6568-4408-8E5B-91E7E9C38E29::.NETCoreApp,Version=v3.1::ParcelApp.Business.Test.ParcelOrderBuilderShould&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::14074AC8-6568-4408-8E5B-91E7E9C38E29::.NETCoreApp,Version=v3.1::ParcelApp.Business.Test.DiscountCalculatorShould&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

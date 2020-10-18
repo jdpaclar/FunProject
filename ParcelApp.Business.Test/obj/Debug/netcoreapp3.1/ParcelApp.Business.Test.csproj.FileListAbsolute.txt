@@ -110,6 +110,7 @@
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/ParcelApp.Business.Test.runtimeconfig.dev.json
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/ParcelApp.Business.Test.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/ParcelApp.Business.Test.pdb
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Castle.Core.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/FluentAssertions.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.CodeCoverage.Shim.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Microsoft.TestPlatform.CoreUtilities.dll
@@ -120,6 +121,7 @@
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Microsoft.TestPlatform.Utilities.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Microsoft.VisualStudio.TestPlatform.Common.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/testhost.dll
+/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Moq.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Newtonsoft.Json.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/NuGet.Frameworks.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/System.Configuration.ConfigurationManager.dll
@@ -206,5 +208,3 @@
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/Debug/netcoreapp3.1/ParcelApp.Business.Test.dll
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/Debug/netcoreapp3.1/ParcelApp.Business.Test.pdb
 /Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/obj/Debug/netcoreapp3.1/ParcelApp.Business.Test.genruntimeconfig.cache
-/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Castle.Core.dll
-/Users/jesse.paclar/Desktop/firstAMLExam/git/FunProject/ParcelApp.Business.Test/bin/Debug/netcoreapp3.1/Moq.dll

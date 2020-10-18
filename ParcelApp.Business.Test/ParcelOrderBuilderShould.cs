@@ -18,7 +18,7 @@ namespace ParcelApp.Business.Test
         public ParcelOrderBuilderShould()
         {
             _mockParcelClassifier = new Mock<IParcelClassifier>();
-            _parcelBuilder = new ParcelOrderBuilder(_mockParcelClassifier.Object);
+            _parcelBuilder = new ParcelOrderBuilder(_mockParcelClassifier.Object, new Mock<IDiscountCalculator>().Object);
         }
 
         [Fact]

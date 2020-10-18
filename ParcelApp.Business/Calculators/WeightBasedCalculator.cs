@@ -1,10 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
-using ParcelApp.Business.Interface;
-using ParcelApp.Common;
 using ParcelApp.Common.Interface;
 
-namespace ParcelApp.Business.CostCalculators
+namespace ParcelApp.Business.Calculators
 {
     public static class WeightBasedCalculator
     {
