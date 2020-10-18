@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Logging;
 using ParcelApp.Business;
 using ParcelApp.Business.Calculators;
 using ParcelApp.Business.Interface;
@@ -13,6 +10,8 @@ using ParcelApp.Common.Discount;
 using ParcelApp.Common.Interface;
 using ParcelApp.Contract;
 using ParcelApp.Contract.WeightBasedParcels;
+using AutoMapper;
+using ParcelApp.Interface;
 
 namespace ParcelApp
 {
@@ -26,9 +25,9 @@ namespace ParcelApp
             
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var worker = serviceProvider.GetService<IOrderBuilder>();
-            
-            var order = worker?.BuildOrder(new ParcelOrder
+            var worker = serviceProvider.GetService<IParcelWorker>();
+
+            var order = new ParcelOrder
             {
                 Speedy = true,
                 DiscountToApply = new List<DiscountTypes>
@@ -39,6 +38,9 @@ namespace ParcelApp
                 ParcelOrderItems = new List<ParcelOrderItem>
                 {
                     new ParcelOrderItem(9, 1, CalculationType.BySize),
+                    new ParcelOrderItem(9, 5, CalculationType.BySize),
+                    new ParcelOrderItem(9, 1, CalculationType.BySize),
+                    new ParcelOrderItem(9, 1, CalculationType.BySize),
                     new ParcelOrderItem(49, 50, CalculationType.BySize),
                     new ParcelOrderItem(49, 4, CalculationType.BySize),
                     new ParcelOrderItem(51, 100, CalculationType.BySize),
@@ -46,15 +48,16 @@ namespace ParcelApp
                     new ParcelOrderItem(101, 50, CalculationType.ByWeight),
                     new ParcelOrderItem(101, 51, CalculationType.ByWeight),
                 }
-            });
-            
-            PrintOutput(order);
+            };
+
+            worker.ExecuteOrder(order);
 
             serviceProvider.Dispose();
         }
-
         private static void ConfigureServices(IServiceCollection services)
         {
+            Mapper.Initialize(InitializeMappers);
+            
             // Configure Parcel Types
             var sizeBasedParcels = new List<ISizeParcel>
             {
@@ -83,15 +86,21 @@ namespace ParcelApp
             services.AddSingleton(discountConfig);
 
             services
+                .AddLogging(configure => configure.AddConsole())
                 .AddSingleton<IParcelClassifier, ParcelClassifier>()
+                .AddSingleton<IDiscountCalculator, DiscountCalculator>()
                 .AddSingleton<IOrderBuilder, ParcelOrderBuilder>()
-                .AddSingleton<IDiscountCalculator, DiscountCalculator>();
+                .AddSingleton<IParcelWorker, ParcelWorker>();
         }
-
-        private static void PrintOutput(ParcelOrderOutput parcelOrder)
+        
+        private static void InitializeMappers(IMapperConfigurationExpression mapperConfiguration)
         {
-            var generatedOrder = JsonConvert.SerializeObject(parcelOrder);
-            Console.WriteLine(generatedOrder);
+            mapperConfiguration.CreateMap<ParcelOrderOutput, ParcelOutputDisplay>()
+                .ForMember(dest => dest.Speedy, opts => opts.MapFrom(src => src.IsSpeedy ? "Yes" : "No"))
+                .ForMember(dest => dest.SavedCost, opts => opts.MapFrom(src => $"-${src.TotalSaved}"))
+                .ForMember(dest => dest.TotalCost, opts => opts.MapFrom(src => $"${src.TotalCost}"));
+
+            mapperConfiguration.CreateMap<ParcelOrderOutputItem, ParcelOutputLineDisplay>();
         }
     }
 }

@@ -24,7 +24,11 @@ namespace ParcelApp.Business.Calculators
                 TotalCost = items.Select(i => i.Cost).Sum()
             };
             
-            var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(DiscountTypes.Mixed))).Single();
+            var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(DiscountTypes.Mixed))).SingleOrDefault();
+
+            if (discountRule == null)
+                throw new NotSupportedException("Discount Ruleset not supported.");
+            
             var totalCounts = items.Count();
 
             var groups = Math.Abs(totalCounts / discountRule.Limit);
@@ -60,23 +64,27 @@ namespace ParcelApp.Business.Calculators
             
             groupedByParcelDiscountType.ToList().ForEach(grp =>
             {
-                var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(grp.Key.DiscountTypes))).Single();
-                var totalCounts = grp.Count();
-                var groups = Math.Abs(totalCounts / discountRule.Limit);
+                var discountRule = (_configuredDiscounts.Where(t => t.DiscountTypes.Equals(grp.Key.DiscountTypes))).SingleOrDefault();
 
-                if (groups <= 0) return;
-                var i = 0;
-
-                IEnumerable<ParcelOrderOutputItem> modifiedGroup = grp;
-                    
-                do
+                if (discountRule != null)
                 {
-                    var min = modifiedGroup.Select(m => m.Cost).Min();
-                    appliedDiscount.SavedCost += min;
-                    appliedDiscount.TotalCost -= min;
-                    modifiedGroup = grp.Where(c => !c.Cost.Equals(min)).ToList();
-                    i += 1;
-                } while (i < groups);
+                    var totalCounts = grp.Count();
+                    var groups = Math.Abs(totalCounts / discountRule.Limit);
+
+                    if (groups <= 0) return;
+                    var i = 0;
+
+                    IEnumerable<ParcelOrderOutputItem> modifiedGroup = grp;
+                    
+                    do
+                    {
+                        var min = modifiedGroup.Select(m => m.Cost).Min();
+                        appliedDiscount.SavedCost += min;
+                        appliedDiscount.TotalCost -= min;
+                        modifiedGroup = grp.Where(c => !c.Cost.Equals(min)).ToList();
+                        i += 1;
+                    } while (i < groups);
+                }
             });
             
             return appliedDiscount;
