@@ -7,18 +7,20 @@ using ParcelApp.Business.Interface;
 using ParcelApp.Business.Test.Helpers;
 using ParcelApp.Common;
 using ParcelApp.Common.Constants;
+using ParcelApp.Common.Discount;
 
 namespace ParcelApp.Business.Test
 {
     public class ParcelOrderBuilderShould
     {
         private readonly Mock<IParcelClassifier> _mockParcelClassifier;
+        private readonly Mock<IDiscountCalculator> _mockDiscountCalculator;
         private readonly ParcelOrderBuilder _parcelBuilder;
         
         public ParcelOrderBuilderShould()
         {
             _mockParcelClassifier = new Mock<IParcelClassifier>();
-            _parcelBuilder = new ParcelOrderBuilder(_mockParcelClassifier.Object, new Mock<IDiscountCalculator>().Object);
+            _parcelBuilder = new ParcelOrderBuilder(_mockParcelClassifier.Object, _mockDiscountCalculator.Object);
         }
 
         [Fact]
@@ -117,38 +119,6 @@ namespace ParcelApp.Business.Test
             // assert
             order.TotalCost.Should().Be(expectedTotal);
         }
-
-        // [Fact]
-        // public void ProperlyCompute_Discounts()
-        // {
-        //     // arrange
-        //     var mediumParcel = new MockMediumParcel();
-        //     var weightBasedParcel = new MockWeightBasedParcel();
-        //     
-        //     _mockParcelClassifier.Setup(p => p.ClassifyParcelBySize(It.IsAny<double>()))
-        //         .Returns(mediumParcel);
-        //
-        //     _mockParcelClassifier.Setup(p => p.ClassifyHeavyParcelByWeight(It.IsAny<double>()))
-        //         .Returns(weightBasedParcel);
-        //
-        //     var parcelOrder = new ParcelOrder
-        //     {
-        //         Speedy = isSpeedy,
-        //         ParcelOrderItems = new List<ParcelOrderItem>
-        //         {
-        //             new ParcelOrderItem(1, 2,  CalculationType.BySize),
-        //             new ParcelOrderItem(1, 1,  CalculationType.BySize),
-        //             new ParcelOrderItem(1, 50,  CalculationType.ByWeight),
-        //             new ParcelOrderItem(1, 51,  CalculationType.ByWeight)
-        //         }
-        //     };
-        //     
-        //     // act
-        //     var order = _parcelBuilder.BuildOrder(parcelOrder);
-        //
-        //     // assert
-        //     order.TotalCost.Should().Be(expectedTotal);
-        // }
 
         [Fact]
         public void ProperlyComputeWeightAddOn()
